@@ -1,0 +1,38 @@
+{
+  "name": "redux-in-french",
+  "version": "1.0.0",
+  "description": "Documentation de Redux en français",
+  "main": "README.md",
+  "scripts": {
+    "build": "gitbook build -g yasakura/redux-in-french",
+    "clean": "rimraf _book",
+    "preprepare": "npm run clean",
+    "prepare": "node_modules/.bin/gitbook install",
+    "prebuild": "npm run prepare",
+    "publish": "npm run clean && npm run build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:yasakura/redux-in-french gh-pages --force",
+    "watch": "gitbook serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasakura/redux-in-french.git"
+  },
+  "keywords": [
+    "redux",
+    "documentation",
+    "french"
+  ],
+  "author": "Lionel Jamal <freelance@ljamal.net> (https://ljamal.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yasakura/redux-in-french/issues"
+  },
+  "homepage": "https://fr.redux.js.org",
+  "dependencies": {
+    "gitbook": "3.2.2",
+    "gitbook-cli": "2.3.0",
+    "gitbook-plugin-edit-link": "2.0.2",
+    "gitbook-plugin-ga": "2.0.0",
+    "gitbook-plugin-prism": "^2.3.0",
+    "rimraf": "2.6.1"
+  }
+}

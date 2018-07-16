@@ -1,0 +1,14 @@
+{
+  "gitbook": "3.2.2",
+  "title": "Redux en Français",
+  "plugins": ["edit-link", "prism", "-highlight"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/yasakura/redux-in-french/tree/master",
+      "label": "Contribuer"
+    },
+    "github": {
+      "url": "https://github.com/yasakura/redux-in-french/"
+    }
+  }
+}
