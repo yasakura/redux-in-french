@@ -100,7 +100,7 @@ Cela suppose que vous utilisiez [npm](https://www.npmjs.com/) comme gestionnaire
 
 Si ce n'est pas le cas, vous pouvez [accéder à ces fichiers avec unpkg](https://unpkg.com/redux/),
 
-La plupart des gens utilisent Redux comme un ensemble de modules [CommonJS](http://webpack.github.io/docs/commonjs.html). Ces modules sont ce que vous obtenez quand vous importez `redux` dans [Webpack](https://webpack.js.org/), [Browserify](http://browserify.org/), ou dans un environnement Node. Si vous aimez vivre en marge et utilisez [Rollup](http://rollupjs.org), nous le supportons aussi.
+La plupart des gens utilisent Redux comme un ensemble de modules [CommonJS](http://webpack.github.io/docs/commonjs.html). Ces modules sont ce que vous obtenez quand vous importez `redux` dans [Webpack](https://webpack.js.org/), [Browserify](http://browserify.org/), ou dans un environnement Node. Si vous aimez vivre en marge et utilisez [Rollup](https://rollupjs.org), nous le supportons aussi.
 
 Si vous n'utilisez pas un gestionnaire de regroupements de modules, ce n'est pas grave. Le paquet npm `redux` inclut les versions de production et de développement [UMD](https://github.com/umdjs/umd) dans le [dossier `dist`](https://unpkg.com/redux/dist/). Elles peuvent être utilisées directement sans un "bundler" et sont donc compatibles avec beaucoup d'outils populaires de chargement de modules JavaScript et d'environnements. Par exemple, vous pouvez utiliser un build UMD comme une [`balise <script>`](https://unpkg.com/redux/dist/redux.js) dans la page, ou [indiquer à Bower de l'installer](https://github.com/reactjs/redux/pull/1181#issuecomment-167361975). Les sources UMD permettent à Redux d'être disponible comme variable globale `window.Redux`.
 
@@ -295,7 +295,7 @@ Si vous êtes nouveau avec l'écosystème de NPM et avez des problèmes pour ré
 ## Remerciements
 
 * [L'architecture ELM](https://github.com/evancz/elm-architecture-tutorial) pour une excellente introduction à la modélisation de mises à jour d'états avec des reducers;
-* [Renverser la base de données](http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/) pour me faire perdre la tête;
+* [Renverser la base de données](https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/) pour me faire perdre la tête;
 * [Développer ClojureScript avec Figwheel](https://www.youtube.com/watch?v=j-kj2qwJa_E) pour me convaincre que la réévaluation devrait "juste fonctionner";
 * [Webpack](https://webpack.js.org/concepts/hot-module-replacement/) pour le rechargement des modifications à chaud (Hot Module Replacement);
 * [Flummox](https://github.com/acdlite/flummox) pour m'apprendre à approcher Flux sans passe-partout ou singletons;
@@ -314,7 +314,7 @@ Vous pouvez trouver le logo officiel [sur GitHub](https://github.com/reactjs/red
 ## Journal de modifications
 
 Ce projet adhère à ["Semantic Versioning"](http://semver.org/).  
-Chaque version, avec les instructions de migration, est documentée sur la page [Releases](https://github.com/reactjs/redux/releases) de Github.
+Chaque version, avec les instructions de migration, est documentée sur la page [Releases](https://github.com/reactjs/redux/releases) de GitHub.
 
 ## Mécènes
 
