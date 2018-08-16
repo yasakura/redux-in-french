@@ -62,7 +62,7 @@
   * [React Redux](docs/faq/ReactRedux.md)
   * [Miscellaneous](docs/faq/Miscellaneous.md)
 * [Troubleshooting](docs/Troubleshooting.md)
-* [Glossary](docs/Glossary.md)
+* [Glossaire](docs/Glossary.md)
 * [API Reference](docs/api/README.md)
   * [createStore](docs/api/createStore.md)
   * [Store](docs/api/Store.md)

@@ -1,10 +1,6 @@
-<div style="color: #856404; background-color: #fff3cd; border: solid 1px #ffeeba; padding: .75rem 1.25rem; border-radius: .25rem; font-size: 16px;">
-  <p style="margin-bottom: 0;">⚠️ En cours de traduction ️️⚠️</p>
-</div>
+# Glossaire
 
-# Glossary
-
-This is a glossary of the core terms in Redux, along with their type signatures. The types are documented using [Flow notation](http://flowtype.org/docs/quick-reference.html).
+C'est un glossaire des termes de base dans Redux, avec leurs signatures de type. Les types sont documentés en utilisant [Flow notation](http://flowtype.org/docs/quick-reference.html).
 
 ## State
 
@@ -12,9 +8,9 @@ This is a glossary of the core terms in Redux, along with their type signatures.
 type State = any
 ```
 
-*State* (also called the *state tree*) is a broad term, but in the Redux API it usually refers to the single state value that is managed by the store and returned by [`getState()`](api/Store.md#getState). It represents the entire state of a Redux application, which is often a deeply nested object.
+*State* (aussi appelé *arbre de state* ou *state tree* en anglais) est un terme générique, mais dans l'API de Redux, il fait référence généralement à la valeur du *state* unique qui est géré par le store et retourné par [`getState()`](api/Store.md#getState). Il représente l'état entier d'une application Redux, qui est souvent un objet profondément imbriqué.
 
-By convention, the top-level state is an object or some other key-value collection like a Map, but technically it can be any type. Still, you should do your best to keep the state serializable. Don't put anything inside it that you can't easily turn into JSON.
+Par convention, le *state* de premier niveau est un objet ou une autre collection de valeur-clé comme une carte, mais techniquement il peut être de n'importe quel type. Cependant, vous devriez faire de votre mieux pour garder le *state* sérialisable. Ne mettez rien à l'intérieur que vous ne pouvez pas facilement transformer en JSON.
 
 ## Action
 
@@ -22,13 +18,13 @@ By convention, the top-level state is an object or some other key-value collecti
 type Action = Object
 ```
 
-An *action* is a plain object that represents an intention to change the state. Actions are the only way to get data into the store. Any data, whether from UI events, network callbacks, or other sources such as WebSockets needs to eventually be dispatched as actions.
+Une *action* est un simple objet qui représente une intention de changer le *state*. Les actions sont la seule façon d'obtenir les données dans le *store*. Toutes les données, qu'il s'agisse d'événements de l'interface utilisateur, les rappels réseau ou d'autres sources telles que les *WebSockets* doivent éventuellement être dispatcher en tant qu'actions.
 
-Actions must have a `type` field that indicates the type of action being performed. Types can be defined as constants and imported from another module. It's better to use strings for `type` than [Symbols](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol) because strings are serializable.
+Les actions doivent avoir un champ `type` qui indique le type d'action effectuée. Les types peuvent être définis comme des constantes et importés d'un autre module. Il est préférable d'utiliser des chaînes de caractères pour les `type` plutôt que des [Symbols](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol) car les  chaînes de caractères sont serialisables.
 
-Other than `type`, the structure of an action object is really up to you. If you're interested, check out [Flux Standard Action](https://github.com/acdlite/flux-standard-action) for recommendations on how actions should be constructed.
+Mis à part le champ `type`, la structure de l'objet d'une action est vraiment à vous. Si vous êtes intéressé, regardez [les actions standard de Flux](https://github.com/acdlite/flux-standard-action) pour des recommandations sur la façon dont les actions doivent être construites.
 
-See also [async action](#async-action) below.
+Voir aussi les [actions asynchrones](#async-action) ci-dessous.
 
 ## Reducer
 
@@ -36,50 +32,50 @@ See also [async action](#async-action) below.
 type Reducer<S, A> = (state: S, action: A) => S
 ```
 
-A *reducer* (also called a *reducing function*) is a function that accepts an accumulation and a value and returns a new accumulation. They are used to reduce a collection of values down to a single value.
+Un **_reducer_** (aussi appelé une *fonction réductrice*) est une fonction qui accepte une accumulation est une valeur et renvoi une nouvelle accumulation. Ils sont utilisés pour réduire une collection de valeurs à une seule valeur.
 
-Reducers are not unique to Redux—they are a fundamental concept in functional programming.  Even most non-functional languages, like JavaScript, have a built-in API for reducing. In JavaScript, it's [`Array.prototype.reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
+Les *reducers* ne sont pas uniques à Redux, ils constituent un concept fondamental dans la programmation fonctionnelle. Même la plupart des langages non fonctionnels, comme JavaScript, ont une API intégrée pour réduire des valeurs. En JavaScript, c'est [`Array.prototype.reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
-In Redux, the accumulated value is the state object, and the values being accumulated are actions. Reducers calculate a new state given the previous state and an action. They must be *pure functions*—functions that return the exact same output for given inputs. They should also be free of side-effects. This is what enables exciting features like hot reloading and time travel.
+Dans Redux, la valeur accumulée est un objet d'état (un *state object* en anglais), et les valeurs accumulées sont des actions. Les *reducers* calculent un nouveau *state* donné par le précédent *state* et une action. Ils doivent être des *fonctions pures*, fonctions qui retournent exactement la même sortie pour des entrées données. Ils doivent aussi être exempts d'effet de bord. C'est ce qui permet des fonctionnalités intéressantes comme le rechargement à chaud (*hot reloading*) et le voyage dans le temps.
 
-Reducers are the most important concept in Redux.
+Les *reducers* sont le plus important concept de Redux.
 
-*Do not put API calls into reducers.*
+*Ne pas mettre les appels API dans les reducers.*
 
-## Dispatching Function
+## Function de dispatching
 
 ```js
 type BaseDispatch = (a: Action) => Action
 type Dispatch = (a: Action | AsyncAction) => any
 ```
 
-A *dispatching function* (or simply *dispatch function*) is a function that accepts an action or an [async action](#async-action); it then may or may not dispatch one or more actions to the store.
+Une *fonction de dispatching* (*dispatch function*) est une fonction qui accepte une action ou une [action asynchrone](#async-action); elle peut alors ou non envoyer une ou plusieurs actions au *store*.
 
-We must distinguish between dispatching functions in general and the base [`dispatch`](api/Store.md#dispatch) function provided by the store instance without any middleware.
+Nous devons distinguer les fonctions de dispactching en général et la fonction de base [`dispacth`](api/Store.md#dispatch) fournie par l'instance du store sans aucun *middleware*.
 
-The base dispatch function *always* synchronously sends an action to the store's reducer, along with the previous state returned by the store, to calculate a new state. It expects actions to be plain objects ready to be consumed by the reducer.
+La fonction de dispatch de base envoie *toujours* une action synchrone au *reducer* du *store*, avec le *state* précédent retourné par le *store*, pour calculer un nouveau *state*. Il s'attend à ce que les actions soient de simples objets prêts à être consommés par le réducteur.
 
-[Middleware](#middleware) wraps the base dispatch function. It allows the dispatch function to handle [async actions](#async-action) in addition to actions. Middleware may transform, delay, ignore, or otherwise interpret actions or async actions before passing them to the next middleware. See below for more information.
+Le [Middleware](#middleware) enveloppe la fonction de dispatch de base. Il permet à la fonction de dispatch de gérer les [actions asynchrones](#async-action) en plus des actions. Le middleware peut transformer, retarder, ignorer ou interpréter des actions ou des actions asynchrones avant de les transmettre au prochain middleware. Voir plus bas pour plus d'information.
 
-## Action Creator
+## Créateur d'action
 
 ```js
 type ActionCreator = (...args: any) => Action | AsyncAction
 ```
 
-An *action creator* is, quite simply, a function that creates an action. Do not confuse the two terms—again, an action is a payload of information, and an action creator is a factory that creates an action.
+Un *créateur d'action* (*action creator*) est, tout simplement, une fonction qui crée une action. Ne confondez pas les deux termes, une action est une donnée utile d'information (*payload*) et un *créateur d'action* est une fabrique qui crée une action.
 
-Calling an action creator only produces an action, but does not dispatch it. You need to call the store's [`dispatch`](api/Store.md#dispatch) function to actually cause the mutation. Sometimes we say *bound action creators* to mean functions that call an action creator and immediately dispatch its result to a specific store instance.
+L'appel d'un créateur d'action ne produit qu'une action, mais ne la dispatche pas. Vous devez appeler la fonction [`dispatch`](api/Store.md#dispatch) du store pour causer la mutation. Parfois, nous disons *créateurs d'actions liées* ("*bound action creator*") pour désigner des fonctions qui appellent un créateur d'action et envoient immédiatement son résultat à une instance du *store* spécifique.
 
-If an action creator needs to read the current state, perform an API call, or cause a side effect, like a routing transition, it should return an [async action](#async-action) instead of an action.
+Si un créateur d'action a besoin de lire le *state* actuel, effectuer un appel API ou causer un effet secondaire, comme un changement de route, il doit renvoyer une [action asynchrone](#async-action) au lieu d'une action.
 
-## Async Action
+## Action Asynchrone
 
 ```js
 type AsyncAction = any
 ```
 
-An *async action* is a value that is sent to a dispatching function, but is not yet ready for consumption by the reducer. It will be transformed by [middleware](#middleware) into an action (or a series of actions) before being sent to the base [`dispatch()`](api/Store.md#dispatch) function. Async actions may have different types, depending on the middleware you use. They are often asynchronous primitives, like a Promise or a thunk, which are not passed to the reducer immediately, but trigger action dispatches once an operation has completed.
+Une *action asynchrone* est une valeur qui est envoyée à une fonction de dispatching, mais qui n'est pas prête à être consommée par le *reducer*. Elle sera transformée par un [middlware](#middleware) en une action (ou une série d'actions) avant d'être envoyée à la fonction de base [`dispatch()`](api/Store.md#dispatch). Les actions asynchrones peuvent avoir différents types, selon le middleware que vous utilisez. Elles sont souvent des primitives asynchrones, comme une Promesse ou un *thunk*, qui ne sont pas passées au *reducer* immédiatement, mais déclenchent une action de *dispatch* une fois qu'une opération est terminée.
 
 ## Middleware
 
@@ -88,11 +84,11 @@ type MiddlewareAPI = { dispatch: Dispatch, getState: () => State }
 type Middleware = (api: MiddlewareAPI) => (next: Dispatch) => Dispatch
 ```
 
-A middleware is a higher-order function that composes a [dispatch function](#dispatching-function) to return a new dispatch function. It often turns [async actions](#async-action) into actions.
+Un middleware est une fonction d'ordre supérieur qui constitue une [fonction de dispatching](#dispatching-function) pour renvoyer une nouvelle fonction de dispatching. Il transforme souvent les actions asynchrones en actions.
 
-Middleware is composable using function composition. It is useful for logging actions, performing side effects like routing, or turning an asynchronous API call into a series of synchronous actions.
+Un middleware est composable en utilisant la composition de la fonction. Il est utile pour logguer les actions, effectuer des effets secondaires comme le routage, ou transformer un appel d'API asynchrones en une série d'actions synchrone.
 
-See [`applyMiddleware(...middlewares)`](./api/applyMiddleware.md) for a detailed look at middleware.
+Voir [`applyMiddleware(...middlewares)`](./api/applyMiddleware.md) pour un aperçu détaillé du middleware.
 
 ## Store
 
@@ -105,34 +101,34 @@ type Store = {
 }
 ```
 
-A store is an object that holds the application's state tree.  
-There should only be a single store in a Redux app, as the composition happens on the reducer level.
+Un *store* est un objet qui contient l'arbre de *state* de l'application.  
+Il ne devrait y avoir qu'un seul *store* dans une application Redux, car la composition se produit au niveau du *reducer*.
 
-- [`dispatch(action)`](api/Store.md#dispatch) is the base dispatch function described above.
-- [`getState()`](api/Store.md#getState) returns the current state of the store.
-- [`subscribe(listener)`](api/Store.md#subscribe) registers a function to be called on state changes.
-- [`replaceReducer(nextReducer)`](api/Store.md#replaceReducer) can be used to implement hot reloading and code splitting. Most likely you won't use it.
+- [`dispatch(action)`](api/Store.md#dispatch) est la fonction d'expédition de base décrite ci-dessus.
+- [`getState()`](api/Store.md#getState) renvoi le *state* actuel du *store*.
+- [`subscribe(listener)`](api/Store.md#subscribe) enregistre une fonction à appeler quand le *state* change.
+- [`replaceReducer(nextReducer)`](api/Store.md#replaceReducer) peut être utilisé pour implémenter le remplacement à chaud et le fractionnement du code. Vous ne l'utiliserez probablement pas.
 
-See the complete [store API reference](api/Store.md#dispatch) for more details.
+Voir la [référence complète de l'API](api/Store.md#dispatch) pour plus de détails.
 
-## Store creator
+## Créateur de *Store*
 
 ```js
 type StoreCreator = (reducer: Reducer, preloadedState: ?State) => Store
 ```
 
-A store creator is a function that creates a Redux store. Like with dispatching function, we must distinguish the base store creator, [`createStore(reducer, preloadedState)`](api/createStore.md) exported from the Redux package, from store creators that are returned from the store enhancers.
+Un créateur de *store* est une fonction qui créé un *store* Redux. Comme avec la fonction de dispatching, nous devons distinguer le créateur de *store* de base, [`createStore(reducer, preloadedState)`](api/createStore.md) exporté du paquet de Redux, des créateurs de *store* qui sont renvoyé par les exhausteurs de *store* ("*store enhancers"*).
 
-## Store enhancer
+## Exhausteur de *Store*
 
 ```js
 type StoreEnhancer = (next: StoreCreator) => StoreCreator
 ```
 
-A store enhancer is a higher-order function that composes a store creator to return a new, enhanced store creator. This is similar to middleware in that it allows you to alter the store interface in a composable way.
+Un exhausteur de *store* est une fonction d'ordre supérieur qui compose un créateur de *store* qui retourne un nouveau créateur de *store* amélioré. Ceci est similaire au middleware dans le sens qu'il vous permet de modifier l'interface du *store* de manière composable.
 
-Store enhancers are much the same concept as higher-order components in React, which are also occasionally called “component enhancers”.
+Les exhausteurs de store sont à peu près le même concept que les composants d'ordre supérieur dans React, lesquels sont aussi occasionelememt appelé "exhausteurs de composant" ("*component enhancers*").
 
-Because a store is not an instance, but rather a plain-object collection of functions, copies can be easily created and modified without mutating the original store. There is an example in [`compose`](api/compose.md) documentation demonstrating that.
+Parce qu'un *store* n'est pas une instance, mais plutôt une collection de simples objets de fonctions, les copies peuvent être facilement crées et modifiées sans modifier le *store* original. Il existe un exemple dans la documentation de [`compose`](api/compose.md) qui montre ça.
 
-Most likely you'll never write a store enhancer, but you may use the one provided by the [developer tools](https://github.com/reduxjs/redux-devtools). It is what makes time travel possible without the app being aware it is happening. Amusingly, the [Redux middleware implementation](api/applyMiddleware.md) is itself a store enhancer.
+Très probablement vous n'écrirez jamais un exhausteur de *store*, mais vous pouvez utiliser celui fourni par les [outils de développement](https://github.com/reduxjs/redux-devtools). C'est ce qui rend possible le voyage dans le temps sans que l'application soit au courant de ce qui se passe. De manière amusante, l'[implémentation du middleware Redux](api/applyMiddleware.md) est en lui même un exhausteur de *store*.

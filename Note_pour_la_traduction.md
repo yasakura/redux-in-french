@@ -3,7 +3,7 @@ d'attention :
 
 * Faîtes attention à la grammaire et à l'orthographe
 * Les mots anglais non traduits doivent être en italiques
-* Les expressions anglaises non traduites doivent être entre doubles quote ("")
+* Les expressions anglaises non traduites doivent être en italiques et entre doubles quote ("")
 * Pour les mots techniques, utilisez le tableau ci-dessous
 * Si vous rencontrez un mot technique non présent dans le tableau, veuillez le
 rajouter avec le mot à utiliser pour le français.
@@ -25,6 +25,7 @@ pouvez le modifier dans le tableau et dans les fichiers.
 | object tree   | Arborescence objet <br/> Objet structuré <br/>Arbre d'objet |
 | packages      |                                                     paquets |
 | pattern       |                                                      modèle |
+| payload       |                                              données utiles |
 | plain objects |                                           de simples objets |
 | state         |                                                       state |
 | store         |                                                       store |
